@@ -1,8 +1,9 @@
 export const badAdvice = [
   'Bite your neighbour',
-  'Kick your butt',
+  'Kick your own butt',
   'Fight a squirrel',
-  'Puke on a rando'
+  'Puke on a rando',
+  'Eat some hamster food and go have a terrible time puking on a roller coaster'
 ] as const
 
 export const smartAdvice = [

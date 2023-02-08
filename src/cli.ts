@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import { giveAdvice, giveBadAdvice, giveSmartAdvice } from ".";
-import { smartAdvice } from "./constants";
+import { getSpeechBubble } from "./speechBubble";
+import { moomin } from './characters/moomin'
+import { badAdvice, smartAdvice } from "./constants";
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import type { Argv } from "yargs";
@@ -19,11 +21,11 @@ const argv = yargs(hideBin(process.argv))
  .help()
  .argv
 
-// function say(argv: any) {
-//    // console.log(giveSmartAdvice(smartAdvice))
-//    console.log(argv)
-// }
+function say(argv: any) {
+   const { type, character = 'moomin' } = argv
 
-// say(argv)
+   if (type === 'bad') return console.log(moomin.replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(giveBadAdvice(badAdvice))))
+   if (type === 'good') return console.log(giveSmartAdvice(smartAdvice))
+}
 
-console.log(argv)
+say(argv)
