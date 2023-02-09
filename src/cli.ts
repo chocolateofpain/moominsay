@@ -8,6 +8,7 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import type { Argv } from "yargs";
 import { moominJump } from "./characters/moomin-jump"
+import { moominMama } from "./characters/moomin-mama";
 
 interface Arguments {
   [x: string]: unknown
@@ -17,7 +18,8 @@ interface Arguments {
 
 const Character = {
   moomin: moomin,
-  moominJump: moominJump
+  moominJump: moominJump,
+  moominMama: moominMama
 } as const
 
 type Character = typeof Character
@@ -30,7 +32,7 @@ const argv = yargs(hideBin(process.argv))
  })
  .option("character", {
    alias: "c",
-   choices: ['moomin', 'moominJump'] as const,
+   choices: ['moomin', 'moominJump', 'moominMama'] as const,
    describe: "Who should talk?"
  })
  .demandOption(["type", "character"], "Please specify what kind of advice")
