@@ -1,5 +1,7 @@
 export const moominJump = `
-                                                                                .^~!~               
+                          XXXXXXXXXXXXXXXXXXXX
+                                 \\  / 
+                                  \\/                                          .^~!~               
                                             .  ::                             .~77 ^!               
       :.~7:  .                            !~?7^7J.                           ^77J~ 7:               
     ..:!77J7^7!.                        :~~?7?!J!! :^                       ~7!7! ~J:.    .:::^:    

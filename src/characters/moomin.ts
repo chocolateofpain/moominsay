@@ -1,7 +1,7 @@
 export const moomin = `
                           XXXXXXXXXXXXXXXXXXXX
                  /|  /|          \\  /          
-                ((|_(|            \\/                                   
+                ((|_(||            \\/                                   
                /    _  \`_           
               (    ' _ ' \\             
               |     (.) (.)--._        

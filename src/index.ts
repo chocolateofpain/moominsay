@@ -21,5 +21,6 @@ export function giveBadAdvice(advice: typeof badAdvice): BadAdvice {
 }
 
 function getCharacter(character: string = 'moomin') {
+
   return moomin
 }
