@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-import { giveAdvice, giveBadAdvice, giveSmartAdvice } from ".";
+import { giveBadAdvice, giveSmartAdvice } from ".";
 import { getSpeechBubble } from "./speechBubble";
 import { moomin } from './characters/moomin'
 import { badAdvice, smartAdvice } from "./constants";
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import type { Argv } from "yargs";
 import { moominJump } from "./characters/moomin-jump"
 import { moominMama } from "./characters/moomin-mama";
 
@@ -45,7 +44,5 @@ function say({ type, character = 'moomin'}: Arguments) {
   if (type === 'good') return console.log(Character[character].replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(giveSmartAdvice(smartAdvice))))
 }
 
-const { type, character = Character.moomin } = argv
-
- say(argv)
+say(argv)
 
