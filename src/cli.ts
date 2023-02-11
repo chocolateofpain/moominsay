@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { giveBadAdvice, giveSmartAdvice } from ".";
 import { getSpeechBubble } from "./speechBubble";
 import { moomin } from './characters/moomin'
 import { badAdvice, smartAdvice } from "./constants";
@@ -12,8 +11,9 @@ import { moominPappaSmall } from "./characters/moomin-pappa-small";
 
 interface Arguments {
   [x: string]: unknown
-  type: string
+  type: string | undefined
   character: keyof Character
+  _:(string | number) []
 }
 
 const Character = {
@@ -40,12 +40,32 @@ const argv = yargs(hideBin(process.argv))
  .help()
  .parseSync()
 
+const { type, character, _ } = argv
+const selectedCharacter = Character[character]
 
-function say({ type, character = 'moomin'}: Arguments) {
-  if (argv._.length) return console.log(Character[character].replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(argv._.join(' '))))
-  if (type === 'bad') return console.log(Character[character].replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(giveBadAdvice(badAdvice))))
-  if (type === 'good') return console.log(Character[character].replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(giveSmartAdvice(smartAdvice))))
+function randomIndex (numberOfAdvices: number): number{
+  return Math.floor(Math.random() * numberOfAdvices)
 }
 
-say(argv)
+function getText ({ advice, type } : { advice: ((string | number)[] | typeof smartAdvice | typeof badAdvice), type?: string  } ): string {
+  if (!type && !advice.length) return 'Something\'s wrong!'
+  
+  if (!type) return advice.join(' ')
+  
+  return advice[randomIndex(advice.length)] as string
+}
+
+function createAsciiWithText ({type, _}:  Pick<Arguments, "type" | "_">): string {
+  const textArray = type && !_?.length ? type === 'good' ? smartAdvice : badAdvice : _!
+  const text = getText({ advice: textArray, type })
+
+  return selectedCharacter.replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(text))
+}
+
+
+function say() {
+  return console.log(createAsciiWithText({ type, _}))
+}
+
+say()
 
