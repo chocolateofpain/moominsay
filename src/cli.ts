@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const {stdin} = process;
+import { Buffer } from 'node:buffer';
+
 import { getSpeechBubble } from "./speechBubble";
 import { moomin } from './characters/moomin'
 import { badAdvice, smartAdvice } from "./constants";
@@ -55,16 +58,32 @@ function getText ({ advice, type } : { advice: ((string | number)[] | typeof sma
   return advice[randomIndex(advice.length)] as string
 }
 
-function createAsciiWithText ({type, _}:  Pick<Arguments, "type" | "_">): string {
-  const textArray = type && !_?.length ? type === 'good' ? smartAdvice : badAdvice : _!
-  const text = getText({ advice: textArray, type })
+function createAsciiWithText ({type, text }: { type?: Arguments["type"], text: (string|number)[] }): string {
+  const textArray = type && !text?.length ? type === 'good' ? smartAdvice : badAdvice : text!
+  const finalText = getText({ advice: textArray, type })
 
-  return selectedCharacter.replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(text))
+  return selectedCharacter.replace('XXXXXXXXXXXXXXXXXXXX', getSpeechBubble(finalText))
 }
 
+async function getStdin  () {
+  const result = [];
+  let length = 0;
 
-function say() {
-  return console.log(createAsciiWithText({ type, _}))
+  for await (const chunk of stdin) {
+    result.push(chunk);
+    length += chunk.length;
+  }
+
+  return Buffer.concat(result, length).toString()
+}
+
+async function  say() {
+
+  const userInput = await getStdin();
+
+  if (userInput) console.log(createAsciiWithText({ text: [userInput] }))
+  
+  return console.log(createAsciiWithText({ type, text: _}))
 }
 
 say()
