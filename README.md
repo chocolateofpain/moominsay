@@ -1,20 +1,26 @@
-# Moominsay
+# 🐮 Moominsay
 
-A cowsay with Moomins. 
+A cowsay with Moomins.
 
-## My small weekend project
+## 📅 My small weekend project
 
-I like Moomins. 
+I like Moomins.
 
-## Character
+## 🏗️ Usage
 
-You can pass the `character` flag to pick the character. 
+### Characters
 
-Currently available: 
-- Moomin
-- MoominMama 
-- MoominPappa
+You can pass the `character` (`-c`) flag to pick the character. Currently available characters include:
 
-## Advice
+- `moomin`
+- `moominMama`
+- `moominJump`
+- `moominPappaSmall`
 
-You can pass the `type` flag to get good or bad advice. 
+### Advice
+
+You can pass the `type` (`-t`) flag to get `good` or `bad` advice.
+
+## 📝 License
+
+MIT
