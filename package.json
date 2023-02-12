@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "A cowsay with Moomins",
   "author": "chocolateofpain <chocolateofpain@gmail.com>",
+  "type": "module",
   "scripts": {
     "dev": "ts-node src/cli.ts",
     "build": "tsc",
