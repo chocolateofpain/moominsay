@@ -79,11 +79,13 @@ async function getStdin  () {
 
 async function  say() {
 
-  const userInput = await getStdin();
+  if (stdin.isTTY) 
+   {
+    return console.log(createAsciiWithText({ type, text: _}))
+  }
+   const userInput = await getStdin();
 
-  if (userInput) console.log(createAsciiWithText({ text: [userInput] }))
-  
-  return console.log(createAsciiWithText({ type, text: _}))
+  if (userInput) console.log(createAsciiWithText({ text: [userInput.trim()] }))
 }
 
 say()
